@@ -1,0 +1,16 @@
+{
+  "name": "inotebook-backend",
+  "version": "1.0.0",
+  "description": "Your Notes On The Cloud",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.6.3",
+    "nodemon": "^2.0.20"
+  }
+}
