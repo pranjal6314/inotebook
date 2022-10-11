@@ -8,5 +8,5 @@ const UserSchema = new Schema({
 });
 
 const User=mongoose.model("user", UserSchema);
-User.createIndexes(); 
+User.createIndexes();  // for  making each user as unique user 
 module.exports = User;
