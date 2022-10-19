@@ -2,11 +2,12 @@
 const jwt = require('jsonwebtoken');
 const bcrypt=require("bcryptjs");
 const express=require("express");
+const fetchuser=require("../middleware/fetchuser");
 const router=express.Router();
 const User=require("../models/User.js");
 const { body, validationResult } = require('express-validator');
 const JWT_SECRET="Iamgoodboy";
-// creating a User using :Post "/api/auth/CreateUser" . login Doesn't require
+//Route1 : creating a User using :Post "/api/auth/CreateUser" . login Doesn't require
 
 router.post("/CreateUser",[
        body('email','enter a valid mail id').isEmail(),
@@ -56,7 +57,7 @@ router.post("/CreateUser",[
 })
 
 
-// Authenticate a User using :Post "/api/auth/CreateUser" . Doesn't require login 
+//Route2 : Authenticate a User using :Post "/api/auth/CreateUser" . Doesn't require login 
 
 router.post("/login",[
   body('email','enter a valid mail id').isEmail(),
@@ -96,4 +97,17 @@ router.post("/login",[
 
 })
 
+
+//Route3: Get loggedin User Details using :Post "/api/auth/getuser" . Doesn't require login 
+//fetchuser is a middleware which will fetch the user from jwt token and add id to req object
+
+router.post("/getuser",fetchuser, async (req,res)=>{
+try {
+  const user=await User.findById(req.user.id).select("-password");
+  res.send(user);
+} catch (error) {
+  console.log(error)
+        res.status(500).send("Internal Server Error")
+}
+})
 module.exports =router;
