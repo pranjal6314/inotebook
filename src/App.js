@@ -9,6 +9,9 @@ import Navbar from './Components/Navbar';
 import Home from './Components/Home';
 import About from './Components/About';
 import NoteState from './Context/notes/NoteState';
+import Alert from './Components/Alert';
+
+
 function App() {
   return (
     <>
@@ -16,6 +19,7 @@ function App() {
 
     <Router>
       <Navbar/>
+      <Alert message="hulu luuuu"/>
       <div className="container">
       <Routes>
           <Route path="/" element={<Home />} />
