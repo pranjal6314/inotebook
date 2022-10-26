@@ -13,7 +13,7 @@ const NoteItem = (props) => {
             {/* {font awesome icons for edit and delete} */}
             <div className="d-flex">
             <i className="fas fa-trash mx-2" onClick={()=>{deleteNote(props.note._id)}}></i>
-            <i className="fas fa-edit mx-2" onClick={()=>{editNote(props.note._id,props.note.title,props.note.description)}}></i>
+            <i className="fas fa-edit mx-2" onClick={()=>{props.updatenote(props.note)}}></i>
             </div>
         </div>
       </div>
