@@ -2,12 +2,18 @@ import React, { useEffect,useRef ,useContext,useState } from 'react'
 import noteContext from '../Context/notes/NoteContext';
 import Addnote from './Addnote';
 import NoteItem  from './NoteItem';
+import {useNavigate}  from 'react-router-dom'
 function Notes(props) {
     const context=useContext(noteContext);
+    const history = useNavigate()
     const {notes,getAllNotes,editNote}=context;
   useEffect(() => {
+    if(localStorage.getItem('token')){ //token is present in local storage then only we will get all notes
     getAllNotes();
     // eslint-disable-next-line
+    }else{
+      history('/Login');
+    }
   },[]);
   
   const ref=useRef(null);

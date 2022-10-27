@@ -19,8 +19,9 @@ const Login = (props) => {
       //save the auth token and redirect
       localStorage.setItem('token',json.authtoken);
       //for redirecting we use usehistory hook
-      history("/");
       props.showAlert("Logged in Successfully ","success");
+      history("/");
+      
     }else{
       props.showAlert("Invalid Credentials","danger");
     }
@@ -32,7 +33,8 @@ const Login = (props) => {
 }
   return (
     
-    <div>
+    <div className='mt-2'>
+      <h2>Login to continue to Inotebook</h2>
       <form onSubmit={handleSubmit}>
   
   <div className="mb-3">
