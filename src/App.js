@@ -10,6 +10,8 @@ import Home from './Components/Home';
 import About from './Components/About';
 import NoteState from './Context/notes/NoteState';
 import Alert from './Components/Alert';
+import Login from './Components/login/Login';
+import Signup from './Components/login/Signup' ;
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/About" element={<About />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
       </Routes>
       </div>
     </Router>

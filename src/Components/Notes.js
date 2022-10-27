@@ -14,12 +14,12 @@ function Notes() {
   const refclose=useRef(null);
   const [note,setNote]=useState({id:"",etitle:"",edescription:"",etag:""});
   const updatenote=(currentNote)=>{
-    editNote(note.id,note.etitle,note.edescription,note.etag);
       ref.current.click();
       setNote({ id:currentNote._id, etitle:currentNote.title,edescription:currentNote.description,etag:currentNote.tag});
   }
   const handleClick=(e)=>{
     ref.current.click();
+    editNote(note.id,note.etitle,note.edescription,note.etag);
     console.log("hi")
 }
 const onchange=(e)=>{
@@ -29,7 +29,7 @@ const onchange=(e)=>{
     
     <>
           {/* <!-- Button trigger modal --> */}
-<button type="button" ref={ref} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" ref={ref} style={{}} className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
 </button>
         {/* <!-- Modal --> */}
@@ -45,11 +45,11 @@ const onchange=(e)=>{
                             <form>
                       <div className="mb-3">
                         <label htmlFor="etitle " className="form-label">Title</label>
-                        <input type="text" className="form-control" id="etitle" name='etitle' value={note.etitle} aria-describedby="emailHelp" onChange={onchange}  />
+                        <input type="text" minLength={5} required className="form-control" id="etitle" name='etitle' value={note.etitle} aria-describedby="emailHelp" onChange={onchange}  />
                       </div>
                       <div className="mb-3">
                         <label htmlFor="edescription" className="form-label">Description</label>
-                        <input type="text" name='edescription' className="form-control" value={note.edescription} id="edescription" onChange={onchange} />
+                        <input type="text" minLength={5} required name='edescription' className="form-control" value={note.edescription} id="edescription" onChange={onchange} />
                       </div>
                       <div className="mb-3">
                         <label htmlFor="etag" className="form-label">Tag</label>
@@ -63,7 +63,7 @@ const onchange=(e)=>{
               </div>
               <div className="modal-footer">
                 <button type="button" ref={refclose} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" onClick={handleClick} className="btn btn-primary">Update Note</button>
+                <button disabled={note.etitle.length<5 || note.edescription.length<5}  type="button" onClick={handleClick} className="btn btn-primary">Update Note</button>
               </div>
             </div>
           </div>
@@ -75,6 +75,7 @@ const onchange=(e)=>{
     <Addnote/>
     <div className='row my-3'>
       <h2>Your Notes</h2>
+      {notes.length===0 &&'No Notes to display'}
       {notes.map((note)=>{
         return <NoteItem key={note._id} updatenote={updatenote} note={note}/>
          

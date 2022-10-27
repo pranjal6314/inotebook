@@ -9,6 +9,7 @@
     "bcryptjs": "^2.4.3",
     "concurrently": "^7.5.0",
     "jsonwebtoken": "^8.5.1",
+    "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
@@ -20,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "both":"concurrently \"npm run start\" \"nodemon backend/index.js\""
+    "both": "concurrently \"npm run start\" \"nodemon backend/index.js\""
   },
   "eslintConfig": {
     "extends": [
