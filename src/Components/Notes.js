@@ -2,7 +2,7 @@ import React, { useEffect,useRef ,useContext,useState } from 'react'
 import noteContext from '../Context/notes/NoteContext';
 import Addnote from './Addnote';
 import NoteItem  from './NoteItem';
-function Notes() {
+function Notes(props) {
     const context=useContext(noteContext);
     const {notes,getAllNotes,editNote}=context;
   useEffect(() => {
@@ -16,11 +16,13 @@ function Notes() {
   const updatenote=(currentNote)=>{
       ref.current.click();
       setNote({ id:currentNote._id, etitle:currentNote.title,edescription:currentNote.description,etag:currentNote.tag});
+      
   }
   const handleClick=(e)=>{
     ref.current.click();
     editNote(note.id,note.etitle,note.edescription,note.etag);
     console.log("hi")
+    props.showAlert("Updated Successfully","success");
 }
 const onchange=(e)=>{
         setNote({...note,[e.target.name]:e.target.value});
@@ -28,6 +30,7 @@ const onchange=(e)=>{
   return (
     
     <>
+            <Addnote showAlert={props.showAlert}/>
           {/* <!-- Button trigger modal --> */}
 <button type="button" ref={ref} style={{}} className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
@@ -72,12 +75,12 @@ const onchange=(e)=>{
 
 
 
-    <Addnote/>
+   
     <div className='row my-3'>
       <h2>Your Notes</h2>
       {notes.length===0 &&'No Notes to display'}
       {notes.map((note)=>{
-        return <NoteItem key={note._id} updatenote={updatenote} note={note}/>
+        return <NoteItem key={note._id} updatenote={updatenote} showAlert={props.showAlert}note={note}/>
          
       })} 
     </div>

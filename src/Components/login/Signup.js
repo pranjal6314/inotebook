@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import {useNavigate } from  "react-router-dom";
 // import './signup.css'               
-const Signup = () => {
+const Signup = (props) => {
   const [credentials,setCredentials]=useState({name:"",email:"",password:"",Cpassword:""});
   const history = useNavigate()
   const handleSubmit= async(e)=>{
@@ -16,15 +16,19 @@ const Signup = () => {
     });
     const json= await response.json();
     console.log(json);
-    
+    if(json.success){
       //save the auth token and redirect
       localStorage.setItem('token',json.authtoken);
       //for redirecting we use usehistory hook
       history("/");
-    
+      props.showAlert("Account Created Successfully ","success");
+    }else{
+      props.showAlert("Invalid Credentials","danger");
+    }
 
 
   }
+  
   const onchange=(e)=>{
     setCredentials({...credentials,[e.target.name]:e.target.value});
 }
