@@ -6,7 +6,7 @@ const Signup = (props) => {
   const history = useNavigate()
   const handleSubmit= async(e)=>{
     e.preventDefault();
-    const {name,email,password,Cpassword}=credentials;
+    const {name,email,password}=credentials;
     const response = await fetch(`http://localhost:5000/api/auth/CreateUser/`, {
       method: 'POST', 
       headers: {
