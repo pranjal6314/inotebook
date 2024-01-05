@@ -59,7 +59,7 @@ router.post(
       const authtoken = jwt.sign(data, JWT_SECRET);
       //  .then(user => res.json(user)).catch(err=>{res.json({error :"please enter a unique value for email",message :err.message})});
       //  res.json({user})
-      res.json({ authtoken });
+      res.json({success, authtoken });
     } catch (error) {
       console.log(error.message);
       res.status(500).send("Some Error Occured");

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./login.css";
 const Login = (props) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  
   const history = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,9 +19,7 @@ const Login = (props) => {
     const json = await response.json();
     console.log(json);
     if (json.success) {
-      //save the auth token and redirect
       localStorage.setItem("token", json.authtoken);
-      //for redirecting we use usehistory hook
       props.showAlert("Logged in Successfully ", "success");
       history("/");
     } else {
@@ -32,42 +30,91 @@ const Login = (props) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
   return (
-    <div className="mt-2">
-      <h2>Login to continue to Inotebook</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email Address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            onChange={onchange}
-            value={credentials.email}
-            name="email"
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            value={credentials.password}
-            onChange={onchange}
-            id="password"
-            name="password"
-          />
-        </div>
+ 
+//     <div className="mt-2 flex justify-center items-center flex-col">
+//   <h2 className="text-center text-2xl font-bold">Login to continue to Inotebook</h2>
+//   <form onSubmit={handleSubmit} className="mt-4 w-full max-w-sm">
+//     <div className="mb-3">
+//       <label htmlFor="email" className="block text-sm font-bold text-black">
+//         Email Address
+//       </label>
+//       <input
+//         type="email"
+//         className="form-input mt-1 block w-full border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+//         id="email"
+//         onChange={onchange}
+//         value={credentials.email}
+//         name="email"
+//         placeholder="Enter your email"
+//       />
+//     </div>
+//     <div className="mb-3">
+//       <label htmlFor="password" className="block text-sm font-bold text-black">
+//         Password
+//       </label>
+//       <input
+//         type="password"
+//         className="form-input mt-1 block w-full border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+//         value={credentials.password}
+//         onChange={onchange}
+//         id="password"
+//         name="password"
+//         placeholder="Enter your password"
+//       />
+//     </div>
 
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+//     <button
+//       type="submit"
+//       className="btn bg-blue-500 text-white hover:bg-blue-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+//     >
+//       Submit
+//     </button>
+//   </form>
+// </div>
+<div className="mt-2 flex justify-center items-center flex-col">
+  <h2 className="text-center text-2xl font-bold">Login to continue to Inotebook</h2>
+  <form onSubmit={handleSubmit} className="mt-4 w-full max-w-md">
+    <div className="mb-4">
+      <label htmlFor="email" className="block text-sm font-bold text-black">
+        Email Address
+      </label>
+      <input
+        type="email"
+        className="form-input mt-1 block w-full border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:border-blue-300"
+        id="email"
+        onChange={onchange}
+        value={credentials.email}
+        name="email"
+        placeholder="Enter your email"
+      />
     </div>
-  );
+    <div className="mb-4">
+      <label htmlFor="password" className="block text-sm font-bold text-black">
+        Password
+      </label>
+      <input
+        type="password"
+        className="form-input mt-1 block w-full border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:border-blue-300"
+        value={credentials.password}
+        onChange={onchange}
+        id="password"
+        name="password"
+        placeholder="Enter your password"
+      />
+    </div>
+
+    <div className="flex items-center justify-center">
+      <button
+        type="submit"
+        className="btn bg-blue-500 text-white hover:bg-blue-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+
+    );
 };
 
 export default Login;
