@@ -82,14 +82,25 @@ const onchange=(e)=>{
 
 
    
-    <div className='row my-3'>
-      <h2>Your Notes</h2>
-      {notes.length===0 &&'No Notes to display'}
-      {notes.map((note)=>{
-        return <NoteItem key={note._id} updatenote={updatenote} showAlert={props.showAlert}note={note}/>
-         
-      })} 
-    </div>
+  
+  <div className="container mx-auto my-3 bg-gray-100 p-4 rounded">
+  <h2 className="text-2xl font-semibold mb-4">Your Notes</h2>
+  
+  {notes.length === 0 && <p className="text-gray-600">No Notes to display</p>}
+
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    {notes.map((note) => (
+      <div key={note._id} className="bg-white p-4 rounded-md shadow-md">
+        <NoteItem updatenote={updatenote} showAlert={props.showAlert} note={note} />
+      </div>
+    ))}
+  </div>
+</div>
+
+
+
+
+
     </>
   )
 }
